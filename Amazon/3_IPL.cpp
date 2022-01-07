@@ -11,6 +11,7 @@ class Solution {
             dq.push_back(i);
         }
         ans.push_back(v[dq.front()]);
+      
         for(int i=k;i<n;i++)
         {
             while(!dq.empty() && dq.front()<=i-k)

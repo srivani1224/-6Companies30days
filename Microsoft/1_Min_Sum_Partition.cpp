@@ -28,11 +28,14 @@ class Solution{
 	            }
 	        }
 	    }
-	    int ans =  s;
-	    for(int i=0;i<=s/2;i++)
+	    int ans =  0;
+	    for(int i=s/2;i>=0;i--)
 	    {
 	        if(dp[n][i])
-	            ans = min(ans, abs(s-(2*i)));
+	        {
+	            ans = abs(s-(2*i));
+	            break;
+	        }
 	    }
 	    return ans;
 	} 

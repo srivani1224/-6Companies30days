@@ -1,0 +1,50 @@
+class Solution{
+    public:
+    void topological_Sort(vector<int> adj[], int ind, vector<bool> &vis, stack<int> &st)
+    {
+        vis[ind] =  true;
+        for(auto i : adj[ind])
+        {
+            if(!vis[i])
+                topological_Sort(adj,i,vis,st);
+        }
+        st.push(ind);
+    }
+    
+    string findOrder(string s[], int n, int k) 
+    {
+        vector<int> adj[k];
+        int a[26] = {0};
+        for(int i=1;i<n;i++)
+        {
+            int x = 0, y=0;
+            while(x<s[i-1].length() && y<s[i].length())
+            {
+                if(s[i-1][x] != s[i][y])
+                {
+                    adj[s[i-1][x]-'a'].push_back(s[i][y]-'a');
+                    break;
+                }
+                x++;
+                y++;
+            }
+        }
+        stack<int> st;
+        vector<bool> vis(k,false);
+        for(int i=0;i<k;i++)
+        {
+            if(!vis[i])
+            {
+                topological_Sort(adj, i, vis, st);
+            }
+        }
+
+        string ans;
+        while(!st.empty())
+        {
+            ans+=(st.top()+'a');
+            st.pop();
+        }
+        return ans;
+    }
+};
